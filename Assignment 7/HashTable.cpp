@@ -1,6 +1,5 @@
 #include "HashTable.hpp"
 #include <iostream>
-#include <cstdlib>
 
 HashTable::HashTable(int groups) {
     this->groups = groups;
