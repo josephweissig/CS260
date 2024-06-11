@@ -1,12 +1,24 @@
-#ifndef _NODEHPP_
-#define _NODEHPP_
+#pragma once
 
 #include <vector>
+#include <string>
 
-template <typename T>
-struct Node {
-    T data;
-    std::vector<Node<T>*> edges;
+using std::vector;
+using std::string;
+
+struct Edge;
+class Node {
+public:
+    Node(int data);
+    ~Node();
+
+    int getData();
+
+    void addEdge(Node* destination, int weight);
+    vector<Edge*> *getEdges();
+
+    string toString();
+private:
+    int data;
+    vector<Edge*> *edges;
 };
-
-#endif // _NODEHPP_

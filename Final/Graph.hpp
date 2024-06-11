@@ -1,5 +1,4 @@
-#ifndef _GRAPHHPP_
-#define _GRAPHHPP_
+#pragma once
 
 #include <vector>
 #include <string>
@@ -8,14 +7,17 @@
 using std::string;
 using std::vector;
 
-template <typename T>
 class Graph {
 public:
     Graph();
-    int addNode(T data);
-    void addEdge(int source, int destination);
-    vector<Node<T> > nodes;
-    string toString();
-};
+    ~Graph();
 
-#endif // _GRAPHHPP_
+    int addNode(int data);
+    void addEdge(int source, int destination, int weight);
+
+    vector<Node*> *getNodes();
+
+    string toString();
+private:
+    vector<Node*> *nodes;
+};

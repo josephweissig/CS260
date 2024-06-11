@@ -1,18 +1,16 @@
-#include "Node.hpp"
-#include "Graph.cpp"
+#include "Graph.hpp"
 #include <iostream>
 
 using std::cout;
 using std::endl;
 
 int main() {
-    Graph<int> graph;
+    Graph graph;
     graph.addNode(1);
     graph.addNode(2);
     graph.addNode(3);
-    graph.addEdge(0, 1);
-    graph.addEdge(1, 2);
-    cout << "Graph has " << graph.nodes.size() << " nodes." << endl;
+    graph.addEdge(0, 1, 5);
+    graph.addEdge(1, 2, 3);
     cout << graph.toString();
     return 0;
 }

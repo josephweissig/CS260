@@ -5,32 +5,40 @@
 using std::vector;
 using std::string;
 
-template <typename T>
-Graph<T>::Graph() {
-    nodes = vector<Node<T> >();
+Graph::Graph() {
+    nodes = new vector<Node*>;
 }
 
-template <typename T>
-int Graph<T>::addNode(T data) {
-    Node<T> node;
-    node.data = data;
-    nodes.push_back(node);
+Graph::~Graph() {
+    vector<Node*>::iterator it;
+    for (it = nodes->begin(); it != nodes->end(); it++) {
+        delete *it;
+    }
+    delete nodes;
+}
+
+int Graph::addNode(int data) {
+    Node* node = new Node(data);
+    nodes->push_back(node);
     // We wanna return the index of the node we just added, for the purposes of adding edges.
-    return nodes.size() - 1;
+    return nodes->size() - 1;
 }
 
-template <typename T>
-void Graph<T>::addEdge(int source, int destination) {
-    // For now, we're creating an undirected graph, so we need to add edges in both directions.
-    nodes[source].edges.push_back(&nodes[destination]);
-    nodes[destination].edges.push_back(&nodes[source]);
+void Graph::addEdge(int source, int destination, int weight) {
+    // We're not doing an undirected graph anymore, so we need to change up how we're adding edges;
+    // nodes[source].edges.push_back(&nodes[destination]);
+    // nodes[destination].edges.push_back(&nodes[source]);
+    nodes->at(source)->addEdge(nodes->at(destination), weight);
 }
 
-template <typename T>
-string Graph<T>::toString() {
+vector<Node*>* Graph::getNodes() {
+    return nodes;
+}
+
+string Graph::toString() {
     string result = "";
-    for (int i = 0; i < nodes.size(); i++) {
-        result += "Node " + std::to_string(i) + " has " + std::to_string(nodes[i].edges.size()) + " edges.\n";
+    for (int i = 0; i < nodes->size(); i++) {
+        result += nodes->at(i)->toString();
     }
     return result;
 }
