@@ -8,6 +8,8 @@ using std::string;
 
 Node::Node(int data) {
     this->data = data;
+    this->parent = nullptr;
+    this->rank = 0;
     edges = new vector<Edge*>();
 }
 
@@ -20,6 +22,22 @@ Node::~Node() {
 
 int Node::getData() {
     return data;
+}
+
+Node* Node::getParent() {
+    return parent;
+}
+
+void Node::setParent(Node* parent) {
+    this->parent = parent;
+}
+
+int Node::getRank() {
+    return rank;
+}
+
+void Node::setRank(int rank) {
+    this->rank = rank;
 }
 
 void Node::addEdge(Node* destination, int weight) {

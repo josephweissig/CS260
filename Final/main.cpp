@@ -1,4 +1,5 @@
 #include "Graph.hpp"
+#include "Edge.hpp"
 #include <iostream>
 
 using std::cout;
@@ -33,13 +34,19 @@ int main() {
     graph.addEdge(5, 6, 8);
     graph.addEdge(6, 8, 8);
     graph.addEdge(7, 8, 4);
-    
+
     cout << graph.toString() << endl;
 
     unordered_map<int, int> distances = graph.dijkstra(0);
     unordered_map<int, int>::iterator it;
     for (it = distances.begin(); it != distances.end(); it++) {
         cout << "Distance to node " << it->first << ": " << it->second << endl;
+    }
+
+    vector<Edge*> mst = graph.kruskal();
+    cout << endl << "Minimum spanning tree:" << endl;
+    for (int i = 0; i < mst.size(); i++) {
+        cout << "Edge from " << mst[i]->source->getData() << " to " << mst[i]->destination->getData() << " with weight " << mst[i]->weight << endl;
     }
 
     return 0;
