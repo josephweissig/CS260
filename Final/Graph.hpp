@@ -2,10 +2,12 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
 #include "Node.hpp"
 
 using std::string;
 using std::vector;
+using std::unordered_map;
 
 class Graph {
 public:
@@ -15,7 +17,9 @@ public:
     int addNode(int data);
     void addEdge(int source, int destination, int weight);
 
-    vector<Node*> *getNodes();
+    unordered_map<int, int> dijkstra(int root);
+
+    vector<Node*>* getNodes();
 
     string toString();
 private:
